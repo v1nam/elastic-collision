@@ -78,23 +78,22 @@ async fn main() {
         let mut active_list: Vec<Particle> = vec![particles[0]];
         let mut possible_collisions: Vec<(usize, usize)> = Vec::new();
         for (pind, particle) in particles.iter().enumerate() {
-            let mut particles_to_remove: Vec<usize> = Vec::new();
             let mut particles_to_add: Vec<Particle> = Vec::new();
             for active_particle in active_list.iter() {
                 if active_particle.id != particle.id {
                     if particle.position.x - particle.radius
-                        > active_particle.position.x + active_particle.radius
+                        <= active_particle.position.x + active_particle.radius
                     {
-                        particles_to_remove.push(active_particle.id);
-                    } else {
                         possible_collisions.push((pind, active_particle.id));
                     }
                     particles_to_add.push(*particle);
                 }
             }
-            for ptr in particles_to_remove {
-                active_list.retain(|p| p.id != ptr);
-            }
+            active_list.retain(|active_particle| {
+                particle.position.x - particle.radius
+                    <= active_particle.position.x + active_particle.radius
+            });
+
             for pta in particles_to_add {
                 active_list.push(pta);
             }
