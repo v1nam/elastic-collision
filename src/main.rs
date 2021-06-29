@@ -52,13 +52,13 @@ impl Particle {
 async fn main() {
     let mut particles: Vec<Particle> = Vec::new();
     let colors = vec![
+        Color::from_rgba(208, 135, 112, 255),
+        Color::from_rgba(136, 192, 208, 255),
         Color::from_rgba(129, 161, 193, 255),
         Color::from_rgba(191, 97, 106, 255),
-        Color::from_rgba(208, 135, 112, 255),
         Color::from_rgba(163, 190, 140, 255),
         Color::from_rgba(235, 203, 139, 255),
         Color::from_rgba(143, 188, 187, 255),
-        Color::from_rgba(136, 192, 208, 255),
     ];
     for id in 0..15 {
         particles.push(Particle::new(
