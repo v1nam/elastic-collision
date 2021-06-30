@@ -146,13 +146,26 @@ async fn main() {
         }
         for particle in particles.iter_mut() {
             particle.update();
+            for i in 0..5 {
+                draw_circle_lines(
+                    particle.position.x,
+                    particle.position.y,
+                    particle.radius - (8 - i * 2) as f32,
+                    2.0,
+                    Color::new(
+                        particle.color.r,
+                        particle.color.g,
+                        particle.color.b,
+                        (125. - (i * 20) as f32) / 255.,
+                    ),
+                );
+            }
             draw_circle(
                 particle.position.x,
                 particle.position.y,
-                particle.radius,
-                particle.color,
+                particle.radius - 8.,
+                Color::from_rgba(255, 255, 255, 190),
             );
-            draw_circle(particle.position.x, particle.position.y, particle.radius - 7., Color::from_rgba(255, 255, 255, 210));
         }
         next_frame().await;
     }
