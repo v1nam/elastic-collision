@@ -52,23 +52,21 @@ impl Particle {
 async fn main() {
     let mut particles: Vec<Particle> = Vec::new();
     let colors = vec![
-        Color::from_rgba(208, 135, 112, 255),
-        Color::from_rgba(136, 192, 208, 255),
-        Color::from_rgba(129, 161, 193, 255),
-        Color::from_rgba(191, 97, 106, 255),
-        Color::from_rgba(163, 190, 140, 255),
-        Color::from_rgba(235, 203, 139, 255),
-        Color::from_rgba(143, 188, 187, 255),
+        Color::from_rgba(30, 174, 66, 125),
+        Color::from_rgba(153, 53, 46, 125),
+        Color::from_rgba(64, 25, 159, 125),
+        Color::from_rgba(41, 90, 204, 125),
+        Color::from_rgba(113, 32, 193, 125),
     ];
     for id in 0..15 {
         particles.push(Particle::new(
-            gen_range(10.0, 20.0),
+            gen_range(13.0, 20.0),
             *colors.choose().unwrap(),
             id,
         ));
     }
     loop {
-        clear_background(Color::from_rgba(36, 42, 54, 255));
+        clear_background(Color::from_rgba(14, 5, 34, 255));
         particles.sort_by(|a, b| {
             vec2(a.position.x + a.radius, a.position.y + a.radius)
                 .x
@@ -154,6 +152,7 @@ async fn main() {
                 particle.radius,
                 particle.color,
             );
+            draw_circle(particle.position.x, particle.position.y, particle.radius - 7., Color::from_rgba(255, 255, 255, 210));
         }
         next_frame().await;
     }
